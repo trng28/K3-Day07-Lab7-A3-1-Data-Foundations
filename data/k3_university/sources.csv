@@ -1,3 +1,9 @@
 doc_id,file_path,title,source_url,retrieved_at,document_version,license_or_permission
-k3-course-registration,data/k3_university/course-registration.md,Đăng ký học phần,https://example.edu/hoc-vu/dang-ky-hoc-phan,2026-08-02,2026.1,example-template-replace-me
-k3-library-services,data/k3_university/library-services.md,Dịch vụ thư viện,https://example.edu/thu-vien/dich-vu,2026-08-02,2026.1,example-template-replace-me
+k3-credit-transfer-requests,data/k3_university/credit-transfer-requests.md,Procedural Guidelines for Credit Transfer Requests,https://policy.vinuni.edu.vn/all-policies/credit-transfer-requests/,2026-07-30,VUNI.13-V2.0,public-page
+k3-library-services,data/k3_university/library-services.md,Library Access & Services Policy,https://policy.vinuni.edu.vn/all-policies/library-policies-for-users/,2026-07-30,POL-LLR-001-V4.0,public-page
+k3-scholarship-maintenance,data/k3_university/scholarship-maintenance.md,Guidelines for Maintaining Entry Scholarship and Financial Aid Support,https://policy.vinuni.edu.vn/all-policies/criteria-to-maintain-the-entry-scholarship-and-financial-aid-support/,2026-07-30,GDL-SAM-004-V2.1,public-page
+k3-financial-aid-request,data/k3_university/financial-aid-request.md,Guidelines for Student Financial Aid Support Request,https://policy.vinuni.edu.vn/all-policies/guidelines-for-student-financial-support-request/,2026-07-30,GDL-FAO-001-V2.0,public-page
+k3-tuition-and-fees,data/k3_university/tuition-and-fees.md,Financial Regulations and Tariff (for student),https://policy.vinuni.edu.vn/all-policies/financial-regulations-and-tariff-for-student-2/,2026-07-30,VUNI_TS03_Student,public-page
+k3-student-code-of-conduct,data/k3_university/student-code-of-conduct.md,Student Code of Conduct,https://policy.vinuni.edu.vn/all-policies/student-affairs-regulations-code-of-conduct/,2026-07-30,VU_CTSV02.EN-V5.0,public-page
+k3-residential-life,data/k3_university/residential-life.md,Residential Life Guideline,https://policy.vinuni.edu.vn/all-policies/residential-life-guideline/,2026-07-30,GDL-SAM-008-V5.0,public-page
+k3-academic-regulations,data/k3_university/academic-regulations.md,Academic Regulations for Full-Time Undergraduate Programs,https://policy.vinuni.edu.vn/all-policies/academic-regulations-for-full-time-undergraduate-programs/,2026-07-30,VU_HT03-V8.1,public-page
