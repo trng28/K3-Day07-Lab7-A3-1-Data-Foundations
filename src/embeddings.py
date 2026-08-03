@@ -53,7 +53,10 @@ class OpenAIEmbedder:
 
         self.model_name = model_name
         self._backend_name = model_name
-        self.client = OpenAI()
+        # Keep interactive API requests bounded when the upstream service is
+        # slow or temporarily unavailable. The UI can then degrade gracefully
+        # instead of surfacing a proxy 502 after a long wait.
+        self.client = OpenAI(timeout=12.0, max_retries=0)
 
     def __call__(self, text: str) -> list[float]:
         response = self.client.embeddings.create(model=self.model_name, input=text)

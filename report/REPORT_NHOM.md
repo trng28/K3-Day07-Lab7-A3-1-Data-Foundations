@@ -1,8 +1,16 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
-**Nhóm:** [Tên nhóm]
-**Thành viên:** [Họ tên từng thành viên]
-**Ngày:** [Ngày nộp]
+**Nhóm:** E1
+**Thành viên:** 
+
+Tên | ID
+---|---
+Nguyễn Mai Thanh Trúc | 2A202601473
+Nguyễn Thị Khánh Ly | 2A202601403
+Nguyễn Thị Tuyết Mai | 2A202601693
+
+**Ngày:** 03-08-2026
+**Phòng:** D303
 
 > **Nộp 1 bản / nhóm.** Phần cá nhân (hướng tiếp cận, kết quả riêng, dự đoán…) mỗi thành viên nộp riêng trong `REPORT_CANHAN.md`. Chi tiết thang điểm: `docs/SCORING.md`.
 
@@ -102,29 +110,33 @@ Chạy `ChunkingStrategyComparator().compare(chunk_size=500)` trên 2 tài liệ
 ### Câu hỏi đánh giá & Câu trả lời chuẩn (nhóm thống nhất)
 
 > **Đúng 5 câu hỏi**, đa dạng, có thể kiểm chứng; **ít nhất 1 câu** cần lọc metadata mới trả lời tốt. Đây là bộ câu hỏi chung cho mọi thành viên chạy.
+>
+> *Bộ câu hỏi dưới đây do Trúc đề xuất (phủ 5/8 tài liệu, đa dạng loại quy định: đăng ký/chuyển tín chỉ, thư viện, học bổng, học phí, kỷ luật) — nhóm rà soát và có thể chỉnh sửa trước khi chốt để mọi thành viên chạy chung.*
 
 | # | Câu hỏi (Query) | Câu trả lời chuẩn (Gold Answer) | Chunk nào chứa thông tin? |
 |---|-------|-------------------------------|--------------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+| 1 | Sinh viên được công nhận tối đa bao nhiêu phần trăm tổng số tín chỉ của chương trình khi xin chuyển đổi tín chỉ (credit transfer)? | Không quá 50% tổng số tín chỉ của toàn bộ chương trình (theo Article 13 Quy chế học vụ). | `credit-transfer-requests.md` mục 3.2 |
+| 2 | Sinh viên đại học (undergraduate) được mượn tối đa bao nhiêu cuốn sách và trong bao lâu tại thư viện? | 3 cuốn, thời hạn 2 tuần, được gia hạn 1 lần. | `library-services.md` bảng "Circulation Privileges" (mục 2.2) |
+| 3 | Học bổng toàn phần (Full scholarship) bị tự động hạ bậc nếu GPA năm học nằm trong khoảng nào? | GPA năm học từ 0.0 đến 2.49 (dưới mức học lực Tốt). | `scholarship-maintenance.md` bảng mục 3, hàng 1 |
+| 4 | Nếu sinh viên rút học trong vòng 2 tuần kể từ ngày bắt đầu học kỳ, học phí đã đóng được hoàn lại bao nhiêu phần trăm? | Hoàn lại 50% học phí thực đóng cho học kỳ/khóa học ngắn hạn đó. | `tuition-and-fees.md` mục D.4 "Tuition Refund" |
+| 5 | Theo quy chế sinh viên, hình thức kỷ luật cao nhất mà sinh viên có thể phải nhận là gì? (**cần `metadata_filter={"audience": "student"}`** để loại tài liệu `audience: all` như thư viện/ký túc xá) | Tier 4 – Dismissal/Expulsion (buộc thôi học/đuổi học). | `student-code-of-conduct.md` mục 3.1, bảng 4 mức kỷ luật (Tier 1-4) |
 
 ### Tổng hợp chất lượng truy xuất của nhóm
 
 > Cách chấm (theo `docs/SCORING.md`): **2 điểm/câu** — top-3 chứa chunk liên quan + agent trả lời đúng (2), có liên quan nhưng thiếu/không ở top-1 (1), không có trong top-3 (0).
+>
+> *Bảng dưới đây mới có kết quả của Trúc (`RecursiveChunker`, chunk_size=500, OpenAI `text-embedding-3-small`) — cần bổ sung cột/kết quả của các thành viên khác để so sánh chéo chiến lược.*
 
 | # | Câu hỏi | Chiến lược tốt nhất cho câu này | Có chunk liên quan trong top-3? | Ghi chú |
 |---|---------|-------------------------------|-------------------------------|---------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+| 1 | Credit transfer tối đa bao nhiêu % | RecursiveChunker (Trúc) — 2đ | Có (top-1, score 0.594) | Đúng ngay top-1, không cần so sánh thêm ở đây |
+| 2 | Mượn sách thư viện | RecursiveChunker (Trúc) — 1đ | Có, nhưng ở top-2 (score 0.444), top-1 lại là đoạn phí phạt sai chủ đề | Cần thử `metadata_filter={"category":"library-services"}` hoặc chunk nhỏ hơn để kiểm tra có cải thiện không |
+| 3 | Học bổng toàn phần hạ bậc khi GPA nào | RecursiveChunker (Trúc) — 2đ | Có (top-1, score 0.552) | Đúng ngay top-1 |
+| 4 | Hoàn học phí rút học trong 2 tuần | *(chưa có chiến lược nào thành công)* — 0đ | Không | **Ca lỗi:** chunk hạng #3 đúng chủ đề ("Tuition Refund") nhưng bị cắt ngay trước con số 50% — gợi ý cần chunk theo heading/mục (`##`) thay vì theo `chunk_size` cứng cho phần bảng phí, hoặc tăng `chunk_size` |
+| 5 | Kỷ luật cao nhất theo quy chế sinh viên | *(chưa có chiến lược nào thành công)* — 0đ | Không (dù đã lọc `audience=student`) | **Ca lỗi:** metadata filter loại đúng tài liệu sai đối tượng nhưng không sửa được việc bảng Tier 1-4 bị tách khỏi ngữ cảnh "kỷ luật/vi phạm" trong chunk của nó — nên thử chunking theo heading để giữ trọn bảng cùng đoạn giới thiệu |
 
 **Lọc bằng metadata có giúp ích không? Ở câu hỏi nào?**
-> *Viết 2-3 câu:*
+> Có giúp ích một phần ở **Câu 5** — `metadata_filter={"audience": "student"}` loại bỏ đúng các tài liệu `audience: all` (thư viện, ký túc xá) khỏi danh sách ứng viên, giảm nhiễu từ các tài liệu không liên quan đến đối tượng câu hỏi. Tuy nhiên với chiến lược `RecursiveChunker` của Trúc, việc lọc **không đủ** để câu 5 trả lời đúng, vì vấn đề gốc nằm ở chunk boundary (bảng Tier 1-4 bị tách khỏi từ khoá ngữ cảnh) chứ không phải do lẫn tài liệu sai đối tượng — cho thấy metadata filtering và chất lượng chunking là hai đòn bẩy độc lập, cần cả hai mới đủ.
 
 ---
 

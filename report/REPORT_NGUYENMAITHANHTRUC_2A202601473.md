@@ -1,7 +1,7 @@
 # Báo Cáo Cá Nhân — Lab 07: Embedding & Vector Store
 
 **Họ tên:** Nguyễn Mai Thanh Trúc
-**Nhóm:** A3-1
+**Nhóm:** E1
 **Ngày:** 03/08/2026
 
 > **Nộp 1 bản / sinh viên.** Phần nhóm (lựa chọn tài liệu, thiết kế chiến lược, bộ câu hỏi đánh giá, demo) nộp chung 1 bản trong `REPORT_NHOM.md`. Chi tiết thang điểm: `docs/SCORING.md`.
